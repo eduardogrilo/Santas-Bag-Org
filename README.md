@@ -6,6 +6,7 @@ This code is part of the "Tech Challenge Series – Advent Calendar 2021" advanc
 ## Task description
 
 Santa is ready to distribute the presents for this Christmas, in a nearby town.  
+
 His bag can only carry a maximum of 50kg of presents so the reindeers don’t get tired during their journey (and because of Santa's back problem).  
 - Presents come in blue, red, yellow and green wrapping paper.  
 - Inside the bag the presents are stacked, from heavier to lighter.  
