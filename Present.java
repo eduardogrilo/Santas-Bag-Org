@@ -10,7 +10,7 @@ class Present {
         this.weight = weight;
         this.color = color;
     }
-
+    
     @Override
     public String toString() {
         return "Present{" +
@@ -21,39 +21,50 @@ class Present {
 }
 
 class SantaPresentBag {
-
+    final int MAX_WEIGHT = 50;
     public List<Present> organizeSantaPresentBag(List<Present> presents) {
         // Add code here
-        String blue = "blue";
-        String red = "red";
-        String green = "green";
-        String yellow = "yellow";        
-        presents.clear();
+        int total = 0;
+        String color = "";
+        Present heaviest_present = new Present(0, "");
+        List <Present> bag = new ArrayList<Present>();
 
-        return List.of();
-       
+        while(total <= MAX_WEIGHT){
+            // Get the heaviest present
+            for (Present present : presents) {
+                if (present.weight >= heaviest_present.weight){
+                    heaviest_present = present;
+                }
+            }
+            // Avoid a adjacent present
+            if(heaviest_present.color != color){
+                bag.add(heaviest_present);
+                color = heaviest_present.color;
+                total = total + heaviest_present.weight;
+            }
+        }
+    return bag;
     }
 }
 
-class Driver
-{
+class Driver{
         // Driver Code
-        public static void main(String[] args)   
-       {
+        public static void main(String[] args) {
         SantaPresentBag bag =  new SantaPresentBag();
-        List<Present> presentWeights = new ArrayList<Present>();
+        List<Present> presents = new ArrayList<Present>();
         Present a = new Present(5, "red");
         Present b = new Present(4,"blue");
         Present c = new Present(15, "green");
         Present d = new Present(14, "yellow");
         Present e = new Present(12, "green");
         Present f = new Present(6, "red");
-        presentWeights.add(a);
-        presentWeights.add(b);
-        presentWeights.add(c);
-        presentWeights.add(d);
-        presentWeights.add(e);
-        System.out.println("return da BAG:"+ bag.organizeSantaPresentBag(presentWeights));
+        presents.add(a);
+        presents.add(b);
+        presents.add(c);
+        presents.add(d);
+        presents.add(e);
+        presents.add(f);
+        System.out.println("return da BAG:"+ bag.organizeSantaPresentBag(presents));
     
     }
 } 
