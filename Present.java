@@ -10,7 +10,7 @@ class Present {
         this.weight = weight;
         this.color = color;
     }
-    
+
     @Override
     public String toString() {
         return "Present{" +
@@ -25,27 +25,34 @@ class SantaPresentBag {
 
     public List<Present> organizeSantaPresentBag(List<Present> presents) {
         // Add code here
-        int total = 0, index_bag = 0;
+        int total = 0;
         String color = "";
         Present heaviest = new Present(0, "");
+        Present copy_heaviest = new Present(0, "");
         List<Present> presentbag = new ArrayList<Present>();
         List<Present> copy = new ArrayList<Present>(presents);
 
-        while(total <= MAX_WEIGHT){
+        while (total <= MAX_WEIGHT) {
             // Get the heaviest present
             for (Present index : copy) {
-                if (index.weight >= heaviest.weight){
+                if (index.weight >= heaviest.weight) {
+                    copy_heaviest = new Present(index.weight, index.color);
                     heaviest = index;
-                }
+                } 
             }
+            total = total + copy_heaviest.weight;
+            
             // Avoid an adjacent present
-            if(heaviest.color != color){ 
-                presentbag.add(index_bag,heaviest);
+            if (copy_heaviest.color != color && total < MAX_WEIGHT) { 
+                presentbag.add(copy_heaviest);
                 copy.remove(heaviest);
-                color = heaviest.color;
-                total = total + heaviest.weight;             
+                color = copy_heaviest.color;  
             }
-            heaviest.weight = 0;   
+            if (total > MAX_WEIGHT)  {
+                total = total - copy_heaviest.weight;
+            }
+            heaviest.weight = 0;
+
         }
         return presentbag;
     }
